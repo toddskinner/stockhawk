@@ -1,4 +1,32 @@
 <resources>
+
+    <!-- activity_main -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_border_width">0dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="fab_translation">12dp</dimen>
+
+    <!-- activity_history -->
+    <dimen name="stock_symbol_tv_horizontal_margin">10dp</dimen>
+    <dimen name="stock_price_tv_horizontal_margin">10dp</dimen>
+    <dimen name="stock_price_tv_text_size">18sp</dimen>
+    <dimen name="stock_percentage_change_tv_horizontal_margin">3dp</dimen>
+    <dimen name="stock_percentage_change_tv_text_size">18sp</dimen>
+    <dimen name="chart_frame_vertical_padding">4dp</dimen>
+    <dimen name="chart_frame_vertical_margin">6dp</dimen>
+    <dimen name="chart_horizontal_margin">12dp</dimen>
+    <dimen name="chart_vertical_margin">16dp</dimen>
+
+    <!-- add_stock_dialog -->
+    <dimen name="dialog_stock_top_margin">16dp</dimen>
+    <dimen name="dialog_stock_bottom_margin">4dp</dimen>
+    <dimen name="dialog_stock_horizontal_margin">4dp</dimen>
+
+    <!-- list_item_quote -->
+    <dimen name="list_item_quote_horizontal_padding">16dp</dimen>
+    <dimen name="list_item_price_horizontal_margin">10dp</dimen>
+    <dimen name="list_item_percent_change_horizontal_margin">3dp</dimen>
+
 </resources>

@@ -5,8 +5,12 @@
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:paddingLeft="@dimen/list_item_quote_horizontal_padding"
+    android:paddingStart="@dimen/list_item_quote_horizontal_padding"
+    android:contentDescription="@string/single_stock"
+    android:paddingRight="@dimen/list_item_quote_horizontal_padding"
+    android:focusable="true"
+    android:paddingEnd="@dimen/list_item_quote_horizontal_padding">
 
     <TextView
         android:id="@+id/symbol"
@@ -27,7 +31,8 @@
             style="@style/BidPriceTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10sp"
+            android:layout_marginEnd="@dimen/list_item_price_horizontal_margin"
+            android:layout_marginRight="@dimen/list_item_price_horizontal_margin"
             tools:text="1000.00" />
 
         <TextView
@@ -35,9 +40,10 @@
             style="@style/PercentChangeTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/percent_change_pill_green"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
+            android:paddingLeft="@dimen/list_item_percent_change_horizontal_margin"
+            android:paddingStart="@dimen/list_item_percent_change_horizontal_margin"
+            android:paddingRight="@dimen/list_item_percent_change_horizontal_margin"
+            android:paddingEnd="@dimen/list_item_percent_change_horizontal_margin"
             tools:text="100%" />
     </LinearLayout>
 </LinearLayout>

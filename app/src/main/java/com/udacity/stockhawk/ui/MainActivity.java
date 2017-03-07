@@ -148,9 +148,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         swipeRefreshLayout.setRefreshing(false);
 
-        if (data.getCount() != 0) {
+        if (networkUp() && data.getCount() == 0) {
+            error.setText(getString(R.string.error_no_stocks));
+            error.setVisibility(View.VISIBLE);
+        } else if (!networkUp() && data.getCount() == 0){
+            error.setText(getString(R.string.error_no_network));
+            error.setVisibility(View.VISIBLE);
+        } else {
             error.setVisibility(View.GONE);
         }
+
+//        if(data.getCount() != 0){
+//            error.setVisibility(View.GONE);
+//        }
+
         adapter.setCursor(data);
     }
 

@@ -11,7 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/stock_symbol_tv"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/stock_symbol_tv_horizontal_margin"
+        android:layout_marginLeft="@dimen/stock_symbol_tv_horizontal_margin"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textSize="28sp" />
 
@@ -25,10 +26,12 @@
             android:layout_height="wrap_content"
             style="@style/BidPriceTextStyle"
             android:id="@+id/stock_price_tv"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10sp"
+            android:layout_marginLeft="@dimen/stock_price_tv_horizontal_margin"
+            android:layout_marginStart="@dimen/stock_price_tv_horizontal_margin"
+            android:layout_marginRight="@dimen/stock_price_tv_horizontal_margin"
+            android:layout_marginEnd="@dimen/stock_price_tv_horizontal_margin"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textSize="18sp" />
+            android:textSize="@dimen/stock_price_tv_text_size" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,23 +39,32 @@
             android:id="@+id/stock_percentage_change_tv"
             style="@style/PercentChangeTextStyle"
             android:background="@drawable/percent_change_pill_green"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
+            android:paddingLeft="@dimen/stock_percentage_change_tv_horizontal_margin"
+            android:paddingStart="@dimen/stock_percentage_change_tv_horizontal_margin"
+            android:paddingRight="@dimen/stock_percentage_change_tv_horizontal_margin"
+            android:paddingEnd="@dimen/stock_percentage_change_tv_horizontal_margin"
             android:layout_gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-            android:textSize="18sp" />
+            android:textSize="@dimen/stock_percentage_change_tv_text_size" />
 
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="4dp">
+        android:paddingTop="@dimen/chart_frame_vertical_padding"
+        android:contentDescription="@string/stock_graph"
+        android:layout_marginBottom="@dimen/chart_frame_vertical_margin">
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/chart_horizontal_margin"
+            android:layout_marginStart="@dimen/chart_horizontal_margin"
+            android:layout_marginRight="@dimen/chart_horizontal_margin"
+            android:layout_marginEnd="@dimen/chart_horizontal_margin"
+            android:layout_marginBottom="@dimen/chart_vertical_margin"/>
 
     </FrameLayout>
 
