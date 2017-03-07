@@ -15,10 +15,13 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.MyValueFormatter;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,12 +33,20 @@ public class HistoryActivity extends AppCompatActivity {
     @BindView(R.id.stock_symbol_tv)
     TextView mStockSymbolView;
 
+    @BindView(R.id.stock_price_tv)
+    TextView mStockPriceView;
+
+    @BindView(R.id.stock_percentage_change_tv)
+    TextView mStockPercentageChangeView;
+
     @BindView(chart)
     LineChart mChart;
 
     Intent historyIntent;
     List<Entry> entries = new ArrayList<>();
     String[] formattedDateValues;
+    private DecimalFormat dollarFormat;
+    private DecimalFormat percentageFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +54,36 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
         ButterKnife.bind(this);
 
+        dollarFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
+        percentageFormat = (DecimalFormat) NumberFormat.getPercentInstance(Locale.US);
+        percentageFormat.setMaximumFractionDigits(2);
+        percentageFormat.setMinimumFractionDigits(2);
+        percentageFormat.setPositivePrefix("+");
+
         historyIntent = getIntent();
         if (historyIntent != null) {
 
             if (historyIntent.hasExtra("symbol")) {
                 String symbol = historyIntent.getStringExtra("symbol");
                 mStockSymbolView.setText(symbol);
+            }
+
+            if (historyIntent.hasExtra("price")) {
+                String price = historyIntent.getStringExtra("price");
+                mStockPriceView.setText(dollarFormat.format(Float.parseFloat(price)));
+            }
+
+            if (historyIntent.hasExtra("percentageChange")) {
+                String percentageChange = historyIntent.getStringExtra("percentageChange");
+                double doublePercentageChange = Double.parseDouble(percentageChange);
+                String revisedPercentageChange = String.valueOf(doublePercentageChange/100);
+                mStockPercentageChangeView.setText(percentageFormat.format(Float.parseFloat(revisedPercentageChange)));
+
+                if (doublePercentageChange > 0) {
+                    mStockPercentageChangeView.setBackgroundResource(R.drawable.percent_change_pill_green);
+                } else {
+                    mStockPercentageChangeView.setBackgroundResource(R.drawable.percent_change_pill_red);
+                }
             }
 
             if (historyIntent.hasExtra("history")) {
@@ -81,28 +116,14 @@ public class HistoryActivity extends AppCompatActivity {
         LineDataSet dataSet = new LineDataSet(entries, "Share Price");
 
         dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-
-
         dataSet.setColor(Color.BLUE);
-//        dataSet.setCircleColor(Color.RED);
         dataSet.setDrawCircles(false);
-
-//        IAxisValueFormatter xAxisFormatter = new IAxisValueFormatter(){
-//
-//            @Override
-//            public String getFormattedValue(float value, AxisBase axis) {
-//                long dateMillis = (long) value;
-//                Date date = new Date(dateMillis);
-//                SimpleDateFormat formattedDate = new SimpleDateFormat("MMM-yyyy");
-//                return formattedDate.format(date);
-//            }
-//        };
 
         LineData lineData = new LineData(dataSet);
 
         XAxis xAxis = mChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-//        xAxis.setGranularity(30f);
+
         mChart.setBackgroundColor(Color.LTGRAY);
         mChart.getAxisRight().setEnabled(false);
         mChart.getDescription().setEnabled(false);

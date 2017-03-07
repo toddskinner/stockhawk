@@ -27,7 +27,6 @@ import com.udacity.stockhawk.sync.QuoteSyncJob;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,
         SwipeRefreshLayout.OnRefreshListener,
@@ -46,12 +45,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private StockAdapter adapter;
 
     @Override
-    public void onClick(String symbol, String history) {
-        Timber.d("Symbol clicked: %s", symbol);
-        Timber.d("History clicked: %s", history);
+    public void onClick(String symbol, String history, String price, String percentageChange) {
         Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
         intent.putExtra("symbol", symbol);
         intent.putExtra("history", history);
+        intent.putExtra("price", price);
+        intent.putExtra("percentageChange", percentageChange);
         startActivity(intent);
     }
 

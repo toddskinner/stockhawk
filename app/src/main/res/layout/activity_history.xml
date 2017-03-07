@@ -11,9 +11,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/stock_symbol_tv"
-        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textSize="22sp" />
+        android:textSize="28sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/BidPriceTextStyle"
+            android:id="@+id/stock_price_tv"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/stock_percentage_change_tv"
+            style="@style/PercentChangeTextStyle"
+            android:background="@drawable/percent_change_pill_green"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:layout_gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
