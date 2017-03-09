@@ -2,7 +2,6 @@ package com.udacity.stockhawk.widget;
 
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -14,7 +13,6 @@ import android.widget.RemoteViews;
 
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.sync.QuoteSyncJob;
-import com.udacity.stockhawk.ui.HistoryActivity;
 import com.udacity.stockhawk.ui.MainActivity;
 
 /**
@@ -41,16 +39,7 @@ public class StocksWidgetProvider extends AppWidgetProvider {
                 setRemoteAdapterV11(context, views);
             }
 
-            boolean useDetailActivity = context.getResources()
-                    .getBoolean(R.bool.use_history_activity);
-            Intent clickIntentTemplate = useDetailActivity
-                    ? new Intent(context, HistoryActivity.class)
-                    : new Intent(context, MainActivity.class);
-
-            PendingIntent clickPendingIntentTemplate = TaskStackBuilder.create(context)
-                    .addNextIntentWithParentStack(clickIntentTemplate)
-                    .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-            views.setPendingIntentTemplate(R.id.widget_list, clickPendingIntentTemplate);
+            views.setPendingIntentTemplate(R.id.widget_list, pendingIntent);
             views.setEmptyView(R.id.widget_list, R.id.widget_empty);
 
             // Tell the AppWidgetManager to perform an update on the current app widget

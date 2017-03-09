@@ -4,7 +4,7 @@
     android:id="@+id/widget"
     android:layout_width="@dimen/widget_detail_default_width"
     android:layout_height="@dimen/widget_detail_default_height"
-    android:background="@color/material_blue_500"
+    android:background="@color/dark_grey"
     android:padding="@dimen/widget_margin">
 
 <LinearLayout
@@ -18,7 +18,9 @@
             android:contentDescription="@string/app_name"
             android:layout_gravity="center"
             android:text="@string/app_name"
-            android:textSize="24sp"/>
+            android:textColor="@color/lightest_grey"
+            android:textStyle="bold"
+            android:textSize="@dimen/widget_title_text_size"/>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -38,8 +40,9 @@
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
+                android:textColor="@color/light_grey"
                 android:text="@string/empty_stocks_list"
-                android:textAppearance="?android:textAppearanceLarge" />
+                android:textAppearance="@android:style/TextAppearance.Medium" />
         </FrameLayout>
     </LinearLayout>
 </FrameLayout>

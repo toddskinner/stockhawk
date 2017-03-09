@@ -8,5 +8,8 @@
     <color name="material_red_700">#D50000</color>
     <color name="material_green_700">#00C853</color>
     <color name="white">#FFFFFF</color>
+    <color name="dark_grey">#424242</color>
+    <color name="light_grey">#BDBDBD</color>
+    <color name="lightest_grey">#EEEEEE</color>
 
 </resources>

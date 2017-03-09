@@ -13,6 +13,10 @@ import android.widget.RemoteViewsService;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  * Created by toddskinner on 3/7/17.
  */
@@ -30,6 +34,9 @@ public class StocksWidgetRemoteViewsService extends RemoteViewsService {
     private static final int INDEX_SYMBOL = 1;
     private static final int INDEX_PRICE = 2;
     private static final int INDEX_PERCENTAGE_CHANGE = 3;
+
+    DecimalFormat dollarFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
+    DecimalFormat percentageFormat = (DecimalFormat) NumberFormat.getPercentInstance(Locale.US);
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
@@ -73,6 +80,11 @@ public class StocksWidgetRemoteViewsService extends RemoteViewsService {
 
             @Override
             public RemoteViews getViewAt(int position) {
+
+                percentageFormat.setMaximumFractionDigits(2);
+                percentageFormat.setMinimumFractionDigits(2);
+                percentageFormat.setPositivePrefix("+");
+
                 if (position == AdapterView.INVALID_POSITION ||
                         data == null || !data.moveToPosition(position)) {
                     return null;
@@ -85,10 +97,19 @@ public class StocksWidgetRemoteViewsService extends RemoteViewsService {
 
                 String symbol = data.getString(INDEX_SYMBOL);
                 String price = data.getString(INDEX_PRICE);
-//                float percentageChange = data.getFloat(INDEX_PERCENTAGE_CHANGE);
+                String percentageChange = data.getString(INDEX_PERCENTAGE_CHANGE);
+                double doublePercentageChange = Double.parseDouble(percentageChange);
+                String revisedPercentageChange = String.valueOf(doublePercentageChange/100);
 
                 views.setTextViewText(R.id.widget_stock_symbol, symbol);
-                views.setTextViewText(R.id.widget_stock_price, price);
+                views.setTextViewText(R.id.widget_stock_price, dollarFormat.format(Float.parseFloat(price)));
+                views.setTextViewText(R.id.widget_stock_percentage_change, percentageFormat.format(Float.parseFloat(revisedPercentageChange)));
+
+                if (doublePercentageChange > 0) {
+                    views.setInt(R.id.widget_stock_percentage_change, "setBackgroundResource", R.drawable.percent_change_pill_green);
+                } else {
+                    views.setInt(R.id.widget_stock_percentage_change, "setBackgroundResource", R.drawable.percent_change_pill_red);
+                }
 
                 final Intent fillInIntent = new Intent();
                 Uri stocksUri = Contract.Quote.URI;
