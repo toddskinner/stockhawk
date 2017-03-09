@@ -28,6 +28,8 @@
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_add">Add</string>
 
+    <string name="empty_stocks_list">No Stock Information Available</string>
+
     <string name="add_stock_symbol">Add stock symbol button</string>
 
     <string name="swipe_delete">Swipe to delete</string>
